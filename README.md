@@ -1,36 +1,12 @@
-# Ghost Storage Cloudinary
 
-[![npm version](https://badge.fury.io/js/ghost-storage-cloudinary.svg)](https://badge.fury.io/js/ghost-storage-cloudinary)
-[![Build Status](https://travis-ci.org/eexit/ghost-storage-cloudinary.svg?branch=master)](https://travis-ci.org/eexit/ghost-storage-cloudinary)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f55e8c82a9a526fe9b2f/maintainability)](https://codeclimate.com/github/eexit/ghost-storage-cloudinary/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/f55e8c82a9a526fe9b2f/test_coverage)](https://codeclimate.com/github/eexit/ghost-storage-cloudinary/test_coverage)
-[![Known Vulnerabilities](https://snyk.io/test/github/eexit/ghost-storage-cloudinary/badge.svg)](https://snyk.io/test/github/eexit/ghost-storage-cloudinary)
-
-A fully featured and deeply tested [Cloudinary](https://cloudinary.com/) [Ghost](https://github.com/TryGhost/Ghost) storage adapter.
+A fully featured and deeply tested [Cloudinary](https://cloudinary.com/) [Ghost](https://github.com/TryGhost/Ghost) storage adapter . This works with Node 18
 
 ### Features
 
 - Up to date with latest Ghost versions :rocket:
-- Latest Cloudinary NodeJS [SDK](https://github.com/cloudinary/cloudinary_npm)
-- Image upload, existence check & deletion (when Ghost will support it)
-- Ability to upload in dated sub-directories (alike first Ghost default Local storage adapter `YYYY/MM`)
-- Ability to upload images into a specific directory
-- Ability to tag images
-- Cool [plugins](plugins)!
+- supports Node v18 
 
-## Installation
 
-### Install using yarn
-
-- Go into Ghost root directory
-- Download the adapter:
-
-```bash
-yarn add ghost-storage-cloudinary
-mv node_modules/ghost-storage-cloudinary content/adapters/storage/ghost-storage-cloudinary
-```
-
-- Done, go configure
 
 ### Install on Docker
 
@@ -39,19 +15,21 @@ Here's an example of using this adapter with a containerized Ghost:
 ```Dockerfile
 FROM ghost:5-alpine as cloudinary
 RUN apk add g++ make python3
-RUN su-exec node yarn add ghost-storage-cloudinary
+RUN su-exec node yarn add ghost-storage-cloudinary-mod
 
 FROM ghost:5-alpine
 COPY --chown=node:node --from=cloudinary $GHOST_INSTALL/node_modules $GHOST_INSTALL/node_modules
-COPY --chown=node:node --from=cloudinary $GHOST_INSTALL/node_modules/ghost-storage-cloudinary $GHOST_INSTALL/content/adapters/storage/ghost-storage-cloudinary
+COPY --chown=node:node --from=cloudinary $GHOST_INSTALL/node_modules/ghost-storage-cloudinary-mod $GHOST_INSTALL/content/adapters/storage/ghost-storage-cloudinary-mod
 # Here, we use the Ghost CLI to set some pre-defined values.
 RUN set -ex; \
-    su-exec node ghost config storage.active ghost-storage-cloudinary; \
-    su-exec node ghost config storage.ghost-storage-cloudinary.upload.use_filename true; \
-    su-exec node ghost config storage.ghost-storage-cloudinary.upload.unique_filename false; \
-    su-exec node ghost config storage.ghost-storage-cloudinary.upload.overwrite false; \
-    su-exec node ghost config storage.ghost-storage-cloudinary.fetch.quality auto; \
-    su-exec node ghost config storage.ghost-storage-cloudinary.fetch.cdn_subdomain true;
+    su-exec node ghost config storage.active ghost-storage-cloudinary-mod; \
+    su-exec node ghost config storage.ghost-storage-cloudinary-mod.upload.use_filename true; \
+    su-exec node ghost config storage.ghost-storage-cloudinary-mod.upload.unique_filename false; \
+    su-exec node ghost config storage.ghost-storage-cloudinary-mod.upload.overwrite false; \
+    su-exec node ghost config storage.ghost-storage-cloudinary-mod.fetch.quality auto; \
+    su-exec node ghost config storage.ghost-storage-cloudinary-mod.fetch.cdn_subdomain true; \
+    su-exec node ghost config mail.transport "SMTP"; \
+    su-exec node ghost config mail.options.service "Mailgun";
 ```
 
 Make sure to set the content path right in the Ghost config as well:
@@ -99,8 +77,8 @@ Runs the linter:
 
 To enable debug logs, set the following environment variable:
 
-    DEBUG=ghost-storage-cloudinary:*
+    DEBUG=ghost-storage-cloudinary-mod:*
 
 ---
 
-Many thanks to @[mmornati](https://github.com/mmornati), @[sethbrasile](https://github.com/sethbrasile) and all other contributors for their work. In the continuation of this project, don't hesitate to fork, contribute and add more features.
+Many thanks to @[mmornati](https://github.com/mmornati), @[sethbrasile](https://github.com/sethbrasile) and all other contributors for their work. In the continuation of this project, don't hesitate to fork, contribute and add more features. I'm not the author of this package..

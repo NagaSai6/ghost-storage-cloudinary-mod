@@ -1,6 +1,6 @@
 {
-  "name": "ghost-storage-cloudinary",
-  "version": "2.2.5",
+  "name": "ghost-storage-cloudinary-mod",
+  "version": "2.2.6",
   "description": "Cloudinary storage adapter for Ghost",
   "main": "index.js",
   "keywords": [
@@ -14,25 +14,12 @@
     "storage",
     "storage-adapter"
   ],
-  "repository": "https://github.com/eexit/ghost-storage-cloudinary",
+  "repository": "",
   "bugs": {
-    "url": "https://github.com/eexit/ghost-storage-cloudinary/issues"
+    "url": ""
   },
-  "author": "Joris Berthelot <admin@eexit.net>",
-  "contributors": [
-    {
-      "name": "Seth Brasile",
-      "email": "seth.brasile@gmail.com"
-    },
-    {
-      "name": "Marco Mornati",
-      "email": "marco@mornati.net"
-    },
-    {
-      "name": "aphe",
-      "email": "afriyandi@cizzu.com"
-    }
-  ],
+  "author": "test",
+
   "license": "ISC",
   "scripts": {
     "test": "mocha tests/index",
@@ -40,7 +27,7 @@
     "eslint": "$(npm bin)/eslint ."
   },
   "engines": {
-    "node": "^14.17.0 || ^16.13.0",
+    "node": "^14.17.0 || ^16.13.0 || ^18.18.2",
     "cli": "^1.17.0"
   },
   "dependencies": {
